@@ -1,0 +1,10 @@
+{
+    "name": "LocalServe",
+    "short_name": "LocalServe",
+    "description": "Find and book trusted local services in New Barrackpur",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#2563eb",
+    "orientation": "portrait-primary"
+}

@@ -1,0 +1,352 @@
+[
+    {
+        "id": "p1",
+        "name": "Amit's Plumbing Works",
+        "category": "c1",
+        "rating": 4.8,
+        "reviewCount": 124,
+        "price": 250,
+        "image": "https://placehold.co/400x300/dbeafe/1e40af?text=Plumber",
+        "location": "Station Road, New Barrackpur",
+        "availability": "Today, 2:00 PM",
+        "tags": [
+            "Pipe Repair",
+            "Installation",
+            "Emergency"
+        ]
+    },
+    {
+        "id": "p2",
+        "name": "Quick Fix Plumbing",
+        "category": "c1",
+        "rating": 4.5,
+        "reviewCount": 89,
+        "price": 200,
+        "image": "https://placehold.co/400x300/dbeafe/1e40af?text=Plumbing",
+        "location": "Madhyamgram",
+        "availability": "Tomorrow, 10:00 AM",
+        "tags": [
+            "Leak Fix",
+            "Bathroom",
+            "Kitchen"
+        ]
+    },
+    {
+        "id": "p3",
+        "name": "Roy Electric & Co",
+        "category": "c2",
+        "rating": 4.5,
+        "reviewCount": 89,
+        "price": 300,
+        "image": "https://placehold.co/400x300/fef3c7/b45309?text=Electrician",
+        "location": "Madhyagram Bazar",
+        "availability": "Tomorrow, 10:00 AM",
+        "tags": [
+            "Wiring",
+            "Fan Repair",
+            "Switchboard"
+        ]
+    },
+    {
+        "id": "p4",
+        "name": "Power Solutions",
+        "category": "c2",
+        "rating": 4.7,
+        "reviewCount": 156,
+        "price": 350,
+        "image": "https://placehold.co/400x300/fef3c7/b45309?text=Electric",
+        "location": "Barrackpur Trunk Road",
+        "availability": "Today, 5:00 PM",
+        "tags": [
+            "AC Wiring",
+            "Inverter",
+            "MCB"
+        ]
+    },
+    {
+        "id": "p5",
+        "name": "Shine Home Cleaners",
+        "category": "c3",
+        "rating": 4.2,
+        "reviewCount": 45,
+        "price": 899,
+        "image": "https://placehold.co/400x300/f3e8ff/7c3aed?text=Cleaning",
+        "location": "Sodepur Road",
+        "availability": "Sat, 9:00 AM",
+        "tags": [
+            "Deep Cleaning",
+            "Kitchen",
+            "Bathroom"
+        ]
+    },
+    {
+        "id": "p6",
+        "name": "SparkleClean Services",
+        "category": "c3",
+        "rating": 4.6,
+        "reviewCount": 78,
+        "price": 1199,
+        "image": "https://placehold.co/400x300/f3e8ff/7c3aed?text=Clean",
+        "location": "New Barrackpur Colony",
+        "availability": "Mon, 8:00 AM",
+        "tags": [
+            "Full Home",
+            "Sofa Cleaning",
+            "Carpet"
+        ]
+    },
+    {
+        "id": "p7",
+        "name": "ColorPro Painting",
+        "category": "c4",
+        "rating": 4.6,
+        "reviewCount": 32,
+        "price": 12000,
+        "image": "https://placehold.co/400x300/fce7f3/be185d?text=Painter",
+        "location": "Masunda",
+        "availability": "Mon, 8:00 AM",
+        "tags": [
+            "Interior",
+            "Exterior",
+            "Wall Art"
+        ]
+    },
+    {
+        "id": "p8",
+        "name": "Rainbow Paints",
+        "category": "c4",
+        "rating": 4.4,
+        "reviewCount": 56,
+        "price": 8500,
+        "image": "https://placehold.co/400x300/fce7f3/be185d?text=Paint",
+        "location": "Titagarh",
+        "availability": "Wed, 9:00 AM",
+        "tags": [
+            "Asian Paints",
+            "Texture",
+            "POP"
+        ]
+    },
+    {
+        "id": "p9",
+        "name": "Dr. Sen's Clinic",
+        "category": "c5",
+        "rating": 4.9,
+        "reviewCount": 210,
+        "price": 500,
+        "image": "https://placehold.co/400x300/dcfce7/166534?text=Doctor",
+        "location": "New Barrackpur Colony",
+        "availability": "Today, 6:00 PM",
+        "tags": [
+            "General Physician",
+            "Pediatrician"
+        ]
+    },
+    {
+        "id": "p10",
+        "name": "Dr. Banerjee's Chamber",
+        "category": "c5",
+        "rating": 4.8,
+        "reviewCount": 189,
+        "price": 400,
+        "image": "https://placehold.co/400x300/dcfce7/166534?text=Clinic",
+        "location": "Station Road",
+        "availability": "Today, 7:30 PM",
+        "tags": [
+            "Medicine",
+            "Health Checkup",
+            "Fever"
+        ]
+    },
+    {
+        "id": "p11",
+        "name": "CoolBreeze AC Service",
+        "category": "c6",
+        "rating": 4.7,
+        "reviewCount": 156,
+        "price": 499,
+        "image": "https://placehold.co/400x300/cffafe/0891b2?text=AC+Repair",
+        "location": "Bisharpara",
+        "availability": "Today, 4:00 PM",
+        "tags": [
+            "Servicing",
+            "Gas Filling",
+            "Install"
+        ]
+    },
+    {
+        "id": "p12",
+        "name": "Arctic Cool AC",
+        "category": "c6",
+        "rating": 4.5,
+        "reviewCount": 98,
+        "price": 599,
+        "image": "https://placehold.co/400x300/cffafe/0891b2?text=AC+Service",
+        "location": "Barrackpur",
+        "availability": "Tomorrow, 11:00 AM",
+        "tags": [
+            "Split AC",
+            "Window AC",
+            "Repair"
+        ]
+    },
+    {
+        "id": "p13",
+        "name": "LifeLine Ambulance",
+        "category": "c7",
+        "rating": 4.9,
+        "reviewCount": 312,
+        "price": 1500,
+        "image": "https://placehold.co/400x300/fee2e2/dc2626?text=Ambulance",
+        "location": "New Barrackpur",
+        "availability": "24/7 Available",
+        "tags": [
+            "Emergency",
+            "ICU",
+            "Oxygen"
+        ]
+    },
+    {
+        "id": "p14",
+        "name": "Quick Response Ambulance",
+        "category": "c7",
+        "rating": 4.8,
+        "reviewCount": 245,
+        "price": 1200,
+        "image": "https://placehold.co/400x300/fee2e2/dc2626?text=Emergency",
+        "location": "Barrackpur",
+        "availability": "24/7 Available",
+        "tags": [
+            "Basic Life Support",
+            "Patient Transport"
+        ]
+    },
+    {
+        "id": "p15",
+        "name": "AutoCare Service Center",
+        "category": "c8",
+        "rating": 4.6,
+        "reviewCount": 134,
+        "price": 1999,
+        "image": "https://placehold.co/400x300/f1f5f9/475569?text=Car+Service",
+        "location": "BT Road, Barrackpur",
+        "availability": "Mon-Sat, 9:00 AM",
+        "tags": [
+            "Full Service",
+            "Oil Change",
+            "Brake"
+        ]
+    },
+    {
+        "id": "p16",
+        "name": "Maruti Authorized Service",
+        "category": "c8",
+        "rating": 4.7,
+        "reviewCount": 267,
+        "price": 2499,
+        "image": "https://placehold.co/400x300/f1f5f9/475569?text=Auto+Care",
+        "location": "Sodepur",
+        "availability": "Mon-Sat, 8:00 AM",
+        "tags": [
+            "Maruti",
+            "Genuine Parts",
+            "Warranty"
+        ]
+    },
+    {
+        "id": "p17",
+        "name": "Sparkle Car Wash",
+        "category": "c9",
+        "rating": 4.4,
+        "reviewCount": 89,
+        "price": 299,
+        "image": "https://placehold.co/400x300/e0f2fe/0369a1?text=Car+Wash",
+        "location": "New Barrackpur Main Road",
+        "availability": "Daily, 7:00 AM - 8:00 PM",
+        "tags": [
+            "Exterior Wash",
+            "Interior",
+            "Polish"
+        ]
+    },
+    {
+        "id": "p18",
+        "name": "Premium Auto Spa",
+        "category": "c9",
+        "rating": 4.8,
+        "reviewCount": 156,
+        "price": 599,
+        "image": "https://placehold.co/400x300/e0f2fe/0369a1?text=Auto+Spa",
+        "location": "Madhyamgram",
+        "availability": "Daily, 8:00 AM - 9:00 PM",
+        "tags": [
+            "Foam Wash",
+            "Wax",
+            "Ceramic Coating"
+        ]
+    },
+    {
+        "id": "p19",
+        "name": "MedPlus Pharmacy",
+        "category": "c10",
+        "rating": 4.7,
+        "reviewCount": 423,
+        "price": 0,
+        "image": "https://placehold.co/400x300/d1fae5/059669?text=Pharmacy",
+        "location": "Station Road, New Barrackpur",
+        "availability": "Open till 10:00 PM",
+        "tags": [
+            "Medicines",
+            "OTC",
+            "Home Delivery"
+        ]
+    },
+    {
+        "id": "p20",
+        "name": "Apollo Pharmacy",
+        "category": "c10",
+        "rating": 4.8,
+        "reviewCount": 567,
+        "price": 0,
+        "image": "https://placehold.co/400x300/d1fae5/059669?text=Apollo",
+        "location": "Barrackpur Main Road",
+        "availability": "24 Hours",
+        "tags": [
+            "Prescription",
+            "Healthcare",
+            "Wellness"
+        ]
+    },
+    {
+        "id": "p21",
+        "name": "Fresh Mart Grocery",
+        "category": "c11",
+        "rating": 4.5,
+        "reviewCount": 234,
+        "price": 0,
+        "image": "https://placehold.co/400x300/ffedd5/c2410c?text=Grocery",
+        "location": "New Barrackpur Market",
+        "availability": "7:00 AM - 10:00 PM",
+        "tags": [
+            "Vegetables",
+            "Fruits",
+            "Daily Needs"
+        ]
+    },
+    {
+        "id": "p22",
+        "name": "BigBasket Partner Store",
+        "category": "c11",
+        "rating": 4.6,
+        "reviewCount": 345,
+        "price": 0,
+        "image": "https://placehold.co/400x300/ffedd5/c2410c?text=BigBasket",
+        "location": "Madhyamgram",
+        "availability": "8:00 AM - 9:00 PM",
+        "tags": [
+            "Grocery",
+            "Home Delivery",
+            "Fresh"
+        ]
+    }
+]
