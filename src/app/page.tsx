@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/layout/Navbar";
 import { SearchBar } from "@/components/features/SearchBar";
 import { CategoryGrid } from "@/components/features/CategoryGrid";
@@ -5,7 +6,9 @@ import {
     ShieldCheck,
     Clock,
     UserCheck,
-    MapPin
+    MapPin,
+    LayoutGrid,
+    ArrowRight
 } from "lucide-react";
 import Link from "next/link";
 
@@ -17,8 +20,8 @@ export default function Home() {
             <Navbar />
 
             {/* Hero Section */}
-            <section className="relative py-16 md:py-28 overflow-hidden bg-gradient-to-b from-blue-50 to-white">
-                <div className="container px-4 md:px-6 relative z-10">
+            <section className="relative py-16 md:py-28 bg-gradient-to-b from-blue-50 to-white">
+                <div className="container px-4 md:px-6 relative z-20">
                     <div className="flex flex-col items-center text-center space-y-4">
                         <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-medium mb-2">
                             <span className="relative flex h-2 w-2">
@@ -39,21 +42,36 @@ export default function Home() {
                     </div>
                 </div>
 
-                {/* Decorative bg elements */}
-                <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-100 rounded-full blur-3xl opacity-50 -z-10" />
-                <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-green-100 rounded-full blur-3xl opacity-50 -z-10" />
+                {/* Decorative bg elements - Constrained */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+                    <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-100 rounded-full blur-3xl opacity-50" />
+                    <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-green-100 rounded-full blur-3xl opacity-50" />
+                </div>
             </section>
 
             {/* Categories Section */}
-            <section className="py-16">
+            <section className="py-20">
                 <div className="container px-4 md:px-6">
-                    <div className="flex items-center justify-between mb-8">
-                        <div>
-                            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900">Browse Categories</h2>
-                            <p className="text-gray-500 mt-1">Choose from 11+ service categories</p>
+                    <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+                        <div className="space-y-4 max-w-2xl">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-widest border border-blue-100">
+                                <LayoutGrid className="w-3 h-3" /> Categories
+                            </div>
+                            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">
+                                Browse by <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Category</span>
+                            </h2>
+                            <p className="text-slate-500 text-lg">
+                                Explore our comprehensive list of services. From home repairs to medical assistance, we've got you covered.
+                            </p>
                         </div>
-                        <Link href="/services" className="text-blue-600 hover:text-blue-700 font-medium text-sm">
-                            View all →
+                        <Link href="/services">
+                            <Button
+                                variant="outline"
+                                className="rounded-full border-slate-200 text-slate-700 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600 transition-all group px-6 h-11"
+                            >
+                                View All Categories
+                                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                            </Button>
                         </Link>
                     </div>
 

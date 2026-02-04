@@ -27,20 +27,24 @@ export default async function ServicesPage({
 
     return (
         <div className="min-h-screen bg-slate-50">
-            {/* Clean Header */}
-            <header className="bg-white border-b border-slate-200 sticky top-0 z-40">
-                <div className="container px-4 py-4 flex items-center justify-between gap-4">
-                    <Link href="/" className="flex items-center gap-2 group">
-                        <ArrowLeft className="h-4 w-4 text-slate-400 group-hover:text-blue-600 transition-colors" />
-                        <span className="font-bold text-xl text-blue-600">LocalServe</span>
+            {/* Classy Glassmorphic Header */}
+            <header className="bg-white/80 backdrop-blur-md border-b border-slate-200/60 sticky top-0 z-40 transition-all duration-300 supports-[backdrop-filter]:bg-white/60">
+                <div className="container px-4 py-3 sm:py-4 flex items-center justify-between gap-4">
+                    <Link href="/" className="flex items-center gap-2.5 group transition-opacity hover:opacity-80">
+                        <div className="p-1.5 rounded-full bg-blue-50 group-hover:bg-blue-100 transition-colors">
+                            <ArrowLeft className="h-4 w-4 text-blue-600" />
+                        </div>
+                        <span className="font-bold text-xl tracking-tight text-blue-600">
+                            LocalServe
+                        </span>
                     </Link>
 
                     <div className="hidden md:flex items-center gap-3">
-                        <Link href="/login">
-                            <Button variant="ghost" size="sm" className="text-slate-600">Login</Button>
-                        </Link>
                         <Link href="/providers">
-                            <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
+                            <Button
+                                size="sm"
+                                className="rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-6 font-medium shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/30 transition-all active:scale-95 border-0"
+                            >
                                 Become a Provider
                             </Button>
                         </Link>
@@ -51,31 +55,41 @@ export default async function ServicesPage({
             <div className="container px-4 py-8 flex flex-col lg:flex-row gap-8">
                 {/* Clean Sidebar */}
                 <aside className="w-full lg:w-64 shrink-0 hidden lg:block">
-                    <div className="sticky top-24 bg-white rounded-xl border border-slate-200 p-5">
-                        <div className="flex items-center gap-2 mb-4 pb-4 border-b border-slate-100">
-                            <Filter className="h-4 w-4 text-slate-500" />
-                            <h3 className="font-semibold text-slate-800">Categories</h3>
+                    <div className="sticky top-24 pl-2">
+                        <div className="flex items-center gap-2 mb-6 px-3">
+                            <Filter className="h-4 w-4 text-blue-600" />
+                            <h3 className="font-bold text-slate-800 tracking-tight text-lg">Categories</h3>
                         </div>
-                        <nav className="flex flex-col gap-1">
+                        <nav className="flex flex-col gap-1.5 relative">
+                            {/* Decorative line */}
+                            <div className="absolute left-0 top-3 bottom-3 w-px bg-slate-200" />
+
                             <Link
                                 href="/services"
-                                className={`px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${!selectedCategory
-                                    ? 'bg-blue-600 text-white'
-                                    : 'text-slate-600 hover:bg-slate-50'
+                                className={`relative px-4 py-3 text-sm font-medium transition-all duration-300 flex items-center group rounded-r-full
+                                    ${!selectedCategory
+                                        ? 'text-blue-600 bg-blue-50/80 border-l-2 border-blue-600'
+                                        : 'text-slate-500 hover:text-slate-900 border-l-2 border-transparent hover:border-slate-300'
                                     }`}
                             >
-                                All Services
+                                <span className={`transition-transform duration-300 ${!selectedCategory ? 'translate-x-1' : 'group-hover:translate-x-1'}`}>
+                                    All Services
+                                </span>
                             </Link>
+
                             {categories.map(cat => (
                                 <Link
                                     key={cat.id}
                                     href={`/services?category=${cat.id}`}
-                                    className={`px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${selectedCategory === cat.id
-                                        ? 'bg-blue-600 text-white'
-                                        : 'text-slate-600 hover:bg-slate-50'
+                                    className={`relative px-4 py-3 text-sm font-medium transition-all duration-300 flex items-center group rounded-r-full
+                                        ${selectedCategory === cat.id
+                                            ? 'text-blue-600 bg-blue-50/80 border-l-2 border-blue-600 shadow-sm'
+                                            : 'text-slate-500 hover:text-slate-900 border-l-2 border-transparent hover:border-slate-300'
                                         }`}
                                 >
-                                    {cat.name}
+                                    <span className={`transition-transform duration-300 ${selectedCategory === cat.id ? 'translate-x-1' : 'group-hover:translate-x-1'}`}>
+                                        {cat.name}
+                                    </span>
                                 </Link>
                             ))}
                         </nav>

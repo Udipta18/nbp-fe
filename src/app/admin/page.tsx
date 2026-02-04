@@ -162,150 +162,160 @@ export default function AdminDashboard() {
     };
 
     const ProviderCard = ({ provider }: { provider: Provider }) => (
-        <Card className="hover:shadow-lg transition-shadow">
-            <CardContent className="p-6">
-                <div className="flex gap-4">
-                    {/* Provider Image */}
-                    <div className="flex-shrink-0">
-                        {provider.image_url ? (
-                            <img
-                                src={provider.image_url}
-                                alt={provider.name}
-                                className="w-24 h-24 rounded-lg object-cover"
-                            />
-                        ) : (
-                            <div className="w-24 h-24 rounded-lg bg-slate-200 flex items-center justify-center">
-                                <Users className="h-12 w-12 text-slate-400" />
+        <Card className="hover:shadow-md transition-shadow duration-300 border-slate-200 overflow-hidden">
+            <CardContent className="p-0">
+                <div className="flex flex-col sm:flex-row">
+                    {/* Left: Image & Identity */}
+                    <div className="p-5 sm:w-48 flex flex-col items-center sm:items-start border-b sm:border-b-0 sm:border-r border-slate-100 bg-slate-50/50">
+                        <div className="relative mb-3">
+                            <div className="w-24 h-24 rounded-2xl overflow-hidden shadow-sm ring-4 ring-white">
+                                {provider.image_url ? (
+                                    <img
+                                        src={provider.image_url}
+                                        alt={provider.name}
+                                        className="w-full h-full object-cover"
+                                    />
+                                ) : (
+                                    <div className="w-full h-full bg-slate-200 flex items-center justify-center">
+                                        <Users className="h-10 w-10 text-slate-400" />
+                                    </div>
+                                )}
                             </div>
-                        )}
+                            <div className="absolute -bottom-2 -right-2">
+                                <Badge
+                                    className={`shadow-sm border-2 border-white ${provider.status === "APPROVED" ? "bg-green-500 hover:bg-green-600" :
+                                            provider.status === "REJECTED" ? "bg-red-500 hover:bg-red-600" :
+                                                "bg-yellow-500 hover:bg-yellow-600"
+                                        }`}
+                                >
+                                    {provider.status === "APPROVED" ? <CheckCircle className="h-3 w-3" /> :
+                                        provider.status === "REJECTED" ? <XCircle className="h-3 w-3" /> :
+                                            <Clock className="h-3 w-3" />}
+                                </Badge>
+                            </div>
+                        </div>
+                        <div className="text-center sm:text-left w-full">
+                            <h3 className="font-bold text-slate-900 truncate mb-1">{provider.name}</h3>
+                            <Badge variant="outline" className="bg-white">{provider.category}</Badge>
+                        </div>
                     </div>
 
-                    {/* Provider Details */}
-                    <div className="flex-1 min-w-0">
-                        <div className="flex items-start justify-between mb-2">
-                            <div>
-                                <h3 className="text-lg font-bold text-slate-900 truncate">
-                                    {provider.name}
-                                </h3>
-                                <Badge className="mt-1">{provider.category}</Badge>
+                    {/* Middle: Details */}
+                    <div className="flex-1 p-5 flex flex-col justify-between">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 mb-4">
+                            <div className="flex items-center gap-2.5 text-sm text-slate-600">
+                                <div className="p-1.5 bg-blue-50 text-blue-600 rounded-md">
+                                    <Phone className="h-3.5 w-3.5" />
+                                </div>
+                                <span className="font-medium">{provider.phone}</span>
                             </div>
-                            <Badge
-                                variant={
-                                    provider.status === "APPROVED"
-                                        ? "default"
-                                        : provider.status === "REJECTED"
-                                            ? "destructive"
-                                            : "secondary"
-                                }
-                            >
-                                {provider.status}
-                            </Badge>
-                        </div>
 
-                        <div className="space-y-1 text-sm text-slate-600 mb-3">
-                            <div className="flex items-center gap-2">
-                                <Phone className="h-4 w-4" />
-                                <span>{provider.phone}</span>
-                            </div>
                             {provider.email && (
-                                <div className="flex items-center gap-2">
-                                    <Mail className="h-4 w-4" />
-                                    <span>{provider.email}</span>
+                                <div className="flex items-center gap-2.5 text-sm text-slate-600">
+                                    <div className="p-1.5 bg-purple-50 text-purple-600 rounded-md">
+                                        <Mail className="h-3.5 w-3.5" />
+                                    </div>
+                                    <span className="truncate">{provider.email}</span>
                                 </div>
                             )}
+
                             {(provider.city || provider.state) && (
-                                <div className="flex items-center gap-2">
-                                    <MapPin className="h-4 w-4" />
-                                    <span>
-                                        {[provider.city, provider.state].filter(Boolean).join(", ")}
-                                    </span>
+                                <div className="flex items-center gap-2.5 text-sm text-slate-600">
+                                    <div className="p-1.5 bg-emerald-50 text-emerald-600 rounded-md">
+                                        <MapPin className="h-3.5 w-3.5" />
+                                    </div>
+                                    <span className="truncate">{[provider.city, provider.state].filter(Boolean).join(", ")}</span>
                                 </div>
                             )}
+
                             {provider.experience_years && (
-                                <div className="flex items-center gap-2">
-                                    <Award className="h-4 w-4" />
-                                    <span>{provider.experience_years} years experience</span>
+                                <div className="flex items-center gap-2.5 text-sm text-slate-600">
+                                    <div className="p-1.5 bg-amber-50 text-amber-600 rounded-md">
+                                        <Award className="h-3.5 w-3.5" />
+                                    </div>
+                                    <span>{provider.experience_years} Years Exp.</span>
                                 </div>
                             )}
-                            <div className="flex items-center gap-2">
-                                <Calendar className="h-4 w-4" />
-                                <span>Applied: {new Date(provider.created_at).toLocaleDateString()}</span>
-                            </div>
                         </div>
 
+                        {/* Description Quote */}
                         {provider.description && (
-                            <p className="text-sm text-slate-600 line-clamp-2 mb-3">
-                                {provider.description}
-                            </p>
+                            <div className="bg-slate-50 p-3 rounded-lg border border-slate-100 mb-4">
+                                <p className="text-sm text-slate-600 italic line-clamp-2">
+                                    "{provider.description}"
+                                </p>
+                            </div>
                         )}
 
-                        {/* Actions */}
-                        <div className="flex flex-wrap gap-2">
-                            {provider.status === "PENDING" && (
-                                <>
+                        {/* Action Bar */}
+                        <div className="flex items-center gap-3 pt-4 border-t border-slate-100 mt-auto">
+                            <div className="flex-1 flex gap-2">
+                                {provider.status === "PENDING" && (
+                                    <>
+                                        <Button
+                                            size="sm"
+                                            onClick={() => handleApprove(provider.id)}
+                                            disabled={actionLoading === provider.id}
+                                            className="bg-green-600 hover:bg-green-700 h-9 px-4"
+                                        >
+                                            <CheckCircle className="h-4 w-4 mr-2" />
+                                            Approve
+                                        </Button>
+                                        <Button
+                                            size="sm"
+                                            variant="outline"
+                                            onClick={() => handleReject(provider.id)}
+                                            disabled={actionLoading === provider.id}
+                                            className="text-red-600 hover:bg-red-50 hover:text-red-700 border-red-200 h-9"
+                                        >
+                                            Reject
+                                        </Button>
+                                    </>
+                                )}
+                                {provider.status === "APPROVED" && (
                                     <Button
                                         size="sm"
-                                        onClick={() => handleApprove(provider.id)}
-                                        disabled={actionLoading === provider.id}
-                                        className="bg-green-600 hover:bg-green-700"
-                                    >
-                                        <CheckCircle className="h-4 w-4 mr-1" />
-                                        Approve
-                                    </Button>
-                                    <Button
-                                        size="sm"
-                                        variant="destructive"
+                                        variant="outline"
                                         onClick={() => handleReject(provider.id)}
                                         disabled={actionLoading === provider.id}
+                                        className="text-orange-600 hover:bg-orange-50 border-orange-200 h-9 ml-auto sm:ml-0"
                                     >
-                                        <XCircle className="h-4 w-4 mr-1" />
-                                        Reject
+                                        <XCircle className="h-4 w-4 mr-2" />
+                                        Revoke Approval
                                     </Button>
-                                </>
-                            )}
-                            {provider.status === "APPROVED" && (
+                                )}
+                                {provider.status === "REJECTED" && (
+                                    <Button
+                                        size="sm"
+                                        variant="outline"
+                                        onClick={() => handleApprove(provider.id)}
+                                        disabled={actionLoading === provider.id}
+                                        className="text-green-600 hover:bg-green-50 border-green-200 h-9"
+                                    >
+                                        <CheckCircle className="h-4 w-4 mr-2" />
+                                        Re-Approve
+                                    </Button>
+                                )}
+                            </div>
+
+                            <div className="flex items-center gap-2 border-l border-slate-200 pl-3 ml-auto">
+                                {provider.website && (
+                                    <Button size="icon" variant="ghost" asChild className="h-9 w-9 text-slate-500">
+                                        <a href={provider.website} target="_blank" rel="noopener noreferrer">
+                                            <ExternalLink className="h-4 w-4" />
+                                        </a>
+                                    </Button>
+                                )}
                                 <Button
-                                    size="sm"
-                                    variant="outline"
-                                    onClick={() => handleReject(provider.id)}
-                                    disabled={actionLoading === provider.id}
-                                >
-                                    <XCircle className="h-4 w-4 mr-1" />
-                                    Reject
-                                </Button>
-                            )}
-                            {provider.status === "REJECTED" && (
-                                <Button
-                                    size="sm"
-                                    variant="outline"
-                                    onClick={() => handleApprove(provider.id)}
-                                    disabled={actionLoading === provider.id}
-                                >
-                                    <CheckCircle className="h-4 w-4 mr-1" />
-                                    Approve
-                                </Button>
-                            )}
-                            <Button
-                                size="sm"
-                                variant="outline"
-                                onClick={() => handleDelete(provider.id)}
-                                disabled={actionLoading === provider.id}
-                            >
-                                <Trash2 className="h-4 w-4 mr-1" />
-                                Delete
-                            </Button>
-                            {provider.website && (
-                                <Button
-                                    size="sm"
+                                    size="icon"
                                     variant="ghost"
-                                    asChild
+                                    onClick={() => handleDelete(provider.id)}
+                                    disabled={actionLoading === provider.id}
+                                    className="h-9 w-9 text-slate-400 hover:text-red-600 hover:bg-red-50"
                                 >
-                                    <a href={provider.website} target="_blank" rel="noopener noreferrer">
-                                        <ExternalLink className="h-4 w-4 mr-1" />
-                                        Website
-                                    </a>
+                                    <Trash2 className="h-4 w-4" />
                                 </Button>
-                            )}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -333,20 +343,26 @@ export default function AdminDashboard() {
                         <div className="flex items-center gap-4">
                             <Link href="/" className="flex items-center gap-2 group">
                                 <span className="font-bold text-xl text-blue-600">LocalServe</span>
-                                <span className="text-slate-400">|</span>
-                                <span className="text-slate-700">Admin Dashboard</span>
+                                <span className="text-slate-400 hidden sm:inline">|</span>
+                                <span className="text-slate-700 hidden sm:inline">Admin Dashboard</span>
                             </Link>
                         </div>
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-2 sm:gap-3">
                             <Link href="/">
-                                <Button variant="outline" size="sm">
+                                <Button variant="outline" size="sm" className="hidden sm:flex">
                                     <Eye className="h-4 w-4 mr-2" />
                                     View Site
                                 </Button>
+                                <Button variant="outline" size="icon" className="flex sm:hidden">
+                                    <Eye className="h-4 w-4" />
+                                </Button>
                             </Link>
-                            <Button variant="outline" size="sm" onClick={handleLogout}>
+                            <Button variant="outline" size="sm" onClick={handleLogout} className="hidden sm:flex">
                                 <LogOut className="h-4 w-4 mr-2" />
                                 Logout
+                            </Button>
+                            <Button variant="outline" size="icon" onClick={handleLogout} className="flex sm:hidden">
+                                <LogOut className="h-4 w-4" />
                             </Button>
                         </div>
                     </div>

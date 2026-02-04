@@ -22,12 +22,12 @@ export function Navbar() {
                 <div className="flex items-center justify-between h-16 md:h-20">
 
                     {/* Left Logo - Text Only */}
-                    <Link href="/" className="flex items-center gap-2 shrink-0">
-                        <div className="p-2 bg-blue-100 rounded-lg text-blue-600">
+                    <Link href="/" className="flex items-center gap-2 shrink-0 group">
+                        <div className="p-2 bg-blue-50 rounded-lg text-blue-600 group-hover:bg-blue-100 transition-colors">
                             <MapPin className="h-6 w-6" />
                         </div>
                         <div>
-                            <h1 className="font-bold text-xl text-gray-900 leading-none">LocalServe</h1>
+                            <h1 className="font-bold text-xl text-blue-600 leading-none">LocalServe</h1>
                             <p className="text-xs text-gray-500 font-medium">New Barrackpore</p>
                         </div>
                     </Link>
@@ -48,9 +48,6 @@ export function Navbar() {
                                 More <ChevronDown className="h-4 w-4" />
                             </button>
                             <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all transform translate-y-1 group-hover:translate-y-0">
-                                <Link href="/dashboard" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">My Bookings</Link>
-                                <Link href="/providers" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Become a Provider</Link>
-                                <div className="border-t my-1"></div>
                                 <Link href="/admin" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Admin Panel</Link>
                             </div>
                         </div>
@@ -59,10 +56,10 @@ export function Navbar() {
                     {/* Right Side - Auth/Menu */}
                     <div className="flex items-center gap-4">
                         <Link
-                            href="/login"
-                            className="hidden sm:inline-flex h-10 items-center justify-center rounded-md bg-blue-600 px-6 text-sm font-medium text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
+                            href="/providers"
+                            className="hidden sm:inline-flex h-10 items-center justify-center rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-6 text-sm font-medium text-white transition-all hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg shadow-md shadow-blue-500/20 active:scale-95"
                         >
-                            Login
+                            Become a Provider
                         </Link>
 
                         {/* Mobile Menu Button */}
@@ -97,8 +94,11 @@ export function Navbar() {
                         </Link>
                     ))}
                     <div className="border-t border-gray-100 my-2"></div>
-                    <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 text-base font-medium text-gray-700 hover:bg-blue-50 rounded-md">
-                        My Bookings
+                    <Link href="/providers" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 text-base font-medium text-gray-700 hover:bg-blue-50 rounded-md">
+                        Become a Provider
+                    </Link>
+                    <Link href="/admin" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 text-base font-medium text-amber-600 hover:bg-amber-50 rounded-md">
+                        Admin Panel
                     </Link>
                     <Link href="/login" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 text-base font-medium text-blue-600 hover:bg-blue-50 rounded-md">
                         Login / Sign Up

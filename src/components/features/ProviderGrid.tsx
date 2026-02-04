@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { Star, Clock, CheckCircle, Search } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { providerService } from "@/lib/provider-service";
 import { ProviderLocation } from "@/components/features/ProviderLocation";
 import { Provider } from "@/types/api";
+import { motion, AnimatePresence } from "framer-motion";
 
 function ShimmerCard() {
     return (
@@ -63,7 +63,9 @@ export function ProviderGrid({ category, search }: ProviderGridProps) {
                 if (search) params.append('search', search);
                 params.append('limit', '50');
 
-                const response = await fetch(`/api/providers?${params.toString()}`);
+                // Call backend directly
+                const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api';
+                const response = await fetch(`${apiUrl}/providers?${params.toString()}`);
                 const data = await response.json();
 
                 setProviders(data.data || []);
@@ -96,83 +98,90 @@ export function ProviderGrid({ category, search }: ProviderGridProps) {
     }
 
     return (
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
-            {providers.map((provider) => (
-                <article
-                    key={provider.id}
-                    className="bg-white rounded-xl border border-slate-200 overflow-hidden hover:border-blue-200 hover:shadow-lg transition-all duration-200"
-                >
-                    {/* Provider Image */}
-                    <div className="aspect-[16/9] relative bg-slate-100">
-                        {provider.image_url ? (
-                            <img
-                                src={provider.image_url}
-                                alt={provider.name}
-                                className="w-full h-full object-cover"
-                            />
-                        ) : (
-                            <div className="w-full h-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
-                                <span className="text-4xl text-blue-400">
-                                    {provider.name.charAt(0)}
-                                </span>
-                            </div>
-                        )}
-                        {/* Rating */}
-                        <div className="absolute top-3 right-3 bg-white px-2 py-1 rounded-full text-xs font-bold flex items-center gap-1 shadow-sm">
-                            <Star className="h-3 w-3 text-yellow-500 fill-yellow-500" />
-                            {provider.rating}
-                        </div>
-                        {/* Verified */}
-                        <div className="absolute top-3 left-3 bg-green-500 text-white px-2 py-1 rounded-full text-[10px] font-bold flex items-center gap-1 shadow-sm">
-                            <CheckCircle className="h-3 w-3" />
-                            Verified
-                        </div>
-                    </div>
-
-                    {/* Content */}
-                    <div className="p-4">
-                        <h3 className="font-semibold text-slate-900 truncate">
-                            {provider.name}
-                        </h3>
-                        <ProviderLocation provider={provider} />
-
-                        {/* Tags */}
-                        {provider.category && (
-                            <div className="flex flex-wrap gap-1.5 mt-3">
-                                <span className="px-2 py-0.5 bg-slate-100 text-slate-600 text-xs rounded-full">
-                                    {provider.category}
-                                </span>
-                                {provider.experience_years && provider.experience_years > 0 && (
-                                    <span className="px-2 py-0.5 bg-blue-50 text-blue-600 text-xs rounded-full">
-                                        {provider.experience_years} Years Exp.
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <AnimatePresence mode="popLayout">
+                {providers.map((provider, index) => (
+                    <motion.article
+                        key={provider.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                        className="group bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-xl hover:shadow-blue-900/5 hover:-translate-y-1 transition-all duration-300"
+                    >
+                        {/* Provider Image */}
+                        <div className="aspect-[16/9] relative overflow-hidden bg-slate-100">
+                            {provider.image_url ? (
+                                <img
+                                    src={provider.image_url}
+                                    alt={provider.name}
+                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                />
+                            ) : (
+                                <div className="w-full h-full bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center relative overflow-hidden">
+                                    <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]" />
+                                    <span className="text-4xl font-bold text-slate-300 relative z-10">
+                                        {provider.name.charAt(0)}
                                     </span>
-                                )}
-                            </div>
-                        )}
+                                </div>
+                            )}
 
-                        {/* Availability */}
-                        <div className="flex items-center gap-1 mt-3 text-sm text-green-600">
-                            <Clock className="h-3 w-3" />
-                            Available Now
+                            {/* Rating Badge */}
+                            <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-full text-xs font-bold flex items-center gap-1 shadow-sm border border-slate-100/50">
+                                <Star className="h-3 w-3 text-yellow-500 fill-yellow-500" />
+                                {provider.rating}
+                            </div>
+
+                            {/* Verified Badge */}
+                            {provider.is_verified && (
+                                <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-green-600 px-2.5 py-1 rounded-full text-[10px] font-bold flex items-center gap-1.5 shadow-sm border border-slate-100/50">
+                                    <CheckCircle className="h-3 w-3" />
+                                    Verified
+                                </div>
+                            )}
                         </div>
 
-                        {/* Price */}
-                        <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                            <div>
-                                <p className="text-[10px] text-slate-400 uppercase">Starts from</p>
-                                <p className="font-bold text-slate-900">
-                                    {provider.price ? `₹${provider.price}` : "Contact for Price"}
-                                </p>
+                        {/* Content */}
+                        <div className="p-5">
+                            <div className="mb-3">
+                                <h3 className="font-bold text-lg text-slate-800 truncate mb-1 group-hover:text-blue-600 transition-colors">
+                                    {provider.name}
+                                </h3>
+                                <ProviderLocation provider={provider} />
                             </div>
-                            <Link href={`/booking/${provider.id}`}>
-                                <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
-                                    Book Now
-                                </Button>
-                            </Link>
+
+                            {/* Tags */}
+                            {provider.category && (
+                                <div className="flex flex-wrap gap-2 mb-4">
+                                    <span className="px-2.5 py-1 bg-slate-50 text-slate-600 border border-slate-100 text-xs font-medium rounded-md">
+                                        {provider.category}
+                                    </span>
+                                    {provider.experience_years && provider.experience_years > 0 && (
+                                        <span className="px-2.5 py-1 bg-blue-50 text-blue-600 border border-blue-100/50 text-xs font-medium rounded-md">
+                                            {provider.experience_years}+ Years Exp.
+                                        </span>
+                                    )}
+                                </div>
+                            )}
+
+                            {/* Footer */}
+                            <div className="pt-4 border-t border-slate-50 flex items-center justify-between">
+                                <div>
+                                    <p className="text-[10px] text-slate-400 font-medium uppercase tracking-wider mb-0.5">Starts from</p>
+                                    <p className="font-bold text-slate-900">
+                                        {provider.price ? `₹${provider.price}` : "Ask Price"}
+                                    </p>
+                                </div>
+                                <Link href={`/booking/${provider.id}`}>
+                                    <Button size="sm" className="bg-slate-900 hover:bg-blue-600 text-white rounded-lg transition-colors duration-300 shadow-md shadow-slate-200">
+                                        Book Now
+                                    </Button>
+                                </Link>
+                            </div>
                         </div>
-                    </div>
-                </article>
-            ))}
+                    </motion.article>
+                ))}
+            </AnimatePresence>
         </div>
     );
 }
