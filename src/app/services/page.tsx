@@ -1,27 +1,41 @@
 import { Button } from "@/components/ui/button";
 import { Star, MapPin, Clock, ArrowLeft, Search, Filter, CheckCircle } from "lucide-react";
 import Link from "next/link";
-import providers from "@/data/providers.json";
 import categories from "@/data/categories.json";
 import { MobileFilter } from "@/components/features/MobileFilter";
+import { providerService } from "@/lib/provider-service";
+import { ProviderLocation } from "@/components/features/ProviderLocation";
+import { Provider } from "@/types/api";
 
 export default async function ServicesPage({
     searchParams,
 }: {
-    searchParams: Promise<{ category?: string; q?: string }>;
+    searchParams: Promise<{ category?: string; search?: string }>;
 }) {
     const params = await searchParams;
     const selectedCategory = params.category;
-    const searchQuery = params.q?.toLowerCase();
+    const searchQuery = params.search;
 
-    // Filter logic
-    const filteredProviders = providers.filter((provider) => {
-        const matchesCategory = selectedCategory ? provider.category === selectedCategory : true;
-        const matchesSearch = searchQuery
-            ? provider.name.toLowerCase().includes(searchQuery) || provider.tags.some(t => t.toLowerCase().includes(searchQuery))
-            : true;
-        return matchesCategory && matchesSearch;
-    });
+    // Map category ID to name if necessary
+    let filterCategory = selectedCategory;
+    if (selectedCategory && selectedCategory.startsWith('c')) {
+        const catObj = categories.find(c => c.id === selectedCategory);
+        if (catObj) {
+            filterCategory = catObj.name;
+        }
+    }
+
+    let filteredProviders: Provider[] = [];
+    try {
+        const response = await providerService.getProviders({
+            category: filterCategory,
+            search: searchQuery,
+            limit: 50
+        });
+        filteredProviders = response.data || [];
+    } catch (error) {
+        console.error("Failed to fetch providers:", error);
+    }
 
     const currentCategory = categories.find(c => c.id === selectedCategory);
 
@@ -108,11 +122,21 @@ export default async function ServicesPage({
                                     key={provider.id}
                                     className="bg-white rounded-xl border border-slate-200 overflow-hidden hover:border-blue-200 hover:shadow-lg transition-all duration-200"
                                 >
-                                    {/* Simple Header */}
-                                    <div className="aspect-[16/9] relative bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
-                                        <span className="text-4xl font-bold text-white/20">
-                                            {categories.find(c => c.id === provider.category)?.name || "Service"}
-                                        </span>
+                                    {/* Provider Image */}
+                                    <div className="aspect-[16/9] relative bg-slate-100">
+                                        {provider.image_url ? (
+                                            <img
+                                                src={provider.image_url}
+                                                alt={provider.name}
+                                                className="w-full h-full object-cover"
+                                            />
+                                        ) : (
+                                            <div className="w-full h-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+                                                <span className="text-4xl font-bold text-white/20">
+                                                    {categories.find(c => c.id === provider.category)?.name || provider.category || "Service"}
+                                                </span>
+                                            </div>
+                                        )}
                                         {/* Rating */}
                                         <div className="absolute top-3 right-3 bg-white px-2 py-1 rounded-full text-xs font-bold flex items-center gap-1 shadow-sm">
                                             <Star className="h-3 w-3 text-yellow-500 fill-yellow-500" />
@@ -130,32 +154,26 @@ export default async function ServicesPage({
                                         <h3 className="font-semibold text-slate-900 truncate">
                                             {provider.name}
                                         </h3>
-                                        <a
-                                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(provider.location + ", New Barrackpore, West Bengal")}`}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="text-sm text-slate-500 flex items-center gap-1 mt-1 hover:text-blue-600 transition-colors"
-                                        >
-                                            <MapPin className="h-3 w-3" />
-                                            {provider.location}
-                                        </a>
+                                        <ProviderLocation provider={provider} />
 
-                                        {/* Tags */}
-                                        <div className="flex flex-wrap gap-1.5 mt-3">
-                                            {provider.tags.slice(0, 3).map(tag => (
-                                                <span
-                                                    key={tag}
-                                                    className="text-[11px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full"
-                                                >
-                                                    {tag}
+                                        {/* Tags - optional */}
+                                        {provider.category && (
+                                            <div className="flex flex-wrap gap-1.5 mt-3">
+                                                <span className="text-[11px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full">
+                                                    {categories.find(c => c.id === provider.category)?.name || provider.category}
                                                 </span>
-                                            ))}
-                                        </div>
+                                                {provider.experience_years && (
+                                                    <span className="text-[11px] bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full">
+                                                        {provider.experience_years} Years Exp.
+                                                    </span>
+                                                )}
+                                            </div>
+                                        )}
 
                                         {/* Availability */}
                                         <div className="mt-3 flex items-center gap-1.5 text-sm text-green-600">
                                             <Clock className="h-3 w-3" />
-                                            Next: {provider.availability}
+                                            Available Now
                                         </div>
                                     </div>
 
@@ -163,7 +181,9 @@ export default async function ServicesPage({
                                     <div className="px-4 py-3 border-t border-slate-100 flex items-center justify-between bg-slate-50/50">
                                         <div>
                                             <p className="text-[10px] text-slate-400 uppercase">Starts from</p>
-                                            <p className="font-bold text-lg text-slate-900">₹{provider.price}</p>
+                                            <p className="font-bold text-lg text-slate-900">
+                                                {provider.price ? `₹${provider.price}` : "Contact for Price"}
+                                            </p>
                                         </div>
                                         <Link href={`/provider/${provider.id}`}>
                                             <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
