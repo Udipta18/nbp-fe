@@ -48,9 +48,10 @@ function LoadingSkeleton() {
 interface ProviderGridProps {
     category?: string;
     search?: string;
+    ward?: number;
 }
 
-export function ProviderGrid({ category, search }: ProviderGridProps) {
+export function ProviderGrid({ category, search, ward }: ProviderGridProps) {
     const [providers, setProviders] = useState<Provider[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -61,6 +62,7 @@ export function ProviderGrid({ category, search }: ProviderGridProps) {
                 const params = new URLSearchParams();
                 if (category) params.append('category', category);
                 if (search) params.append('search', search);
+                if (ward) params.append('ward', ward.toString());
                 params.append('limit', '50');
 
                 // Call backend directly
@@ -78,7 +80,7 @@ export function ProviderGrid({ category, search }: ProviderGridProps) {
         };
 
         fetchProviders();
-    }, [category, search]);
+    }, [category, search, ward]);
 
     if (loading) {
         return <LoadingSkeleton />;
@@ -90,9 +92,18 @@ export function ProviderGrid({ category, search }: ProviderGridProps) {
                 <Search className="h-10 w-10 text-slate-300 mx-auto mb-4" />
                 <h3 className="text-lg font-semibold text-slate-800 mb-2">No services found</h3>
                 <p className="text-slate-500 mb-6">Try adjusting your filters.</p>
-                <Link href="/services">
-                    <Button variant="outline">View All Services</Button>
-                </Link>
+                <div className="flex justify-center gap-3">
+                    {ward && (
+                        <Link href={`/services${category ? `?category=${category}` : ''}${search ? `${category ? '&' : '?'}search=${search}` : ''}`}>
+                            <Button variant="default" className="bg-blue-600 hover:bg-blue-700">
+                                Search in All Wards
+                            </Button>
+                        </Link>
+                    )}
+                    <Link href="/services">
+                        <Button variant="outline">View All Services</Button>
+                    </Link>
+                </div>
             </div>
         );
     }

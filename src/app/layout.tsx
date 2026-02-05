@@ -13,6 +13,8 @@ export const metadata: Metadata = {
     manifest: "/manifest.json",
 };
 
+import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
+
 export default function RootLayout({
     children,
 }: Readonly<{
@@ -20,7 +22,10 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${jakarta.className} antialiased bg-slate-50`}>{children}</body>
+            <body className={`${jakarta.className} antialiased bg-slate-50 relative pb-24 sm:pb-0`}>
+                {children}
+                <MobileBottomNav />
+            </body>
         </html>
     );
 }

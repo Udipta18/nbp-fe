@@ -28,6 +28,7 @@ export default function BecomeProviderPage() {
         city: "",
         state: "",
         zip_code: "",
+        ward_number: 0,
     });
 
     const categories = [
@@ -48,7 +49,7 @@ export default function BecomeProviderPage() {
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
     ) => {
         const { name, value } = e.target;
-        const numericFields = ['experience_years', 'latitude', 'longitude'];
+        const numericFields = ['experience_years', 'latitude', 'longitude', 'ward_number'];
 
         setFormData((prev) => ({
             ...prev,
@@ -209,6 +210,31 @@ export default function BecomeProviderPage() {
                                         </option>
                                     ))}
                                 </select>
+                            </div>
+
+                            {/* Ward Number */}
+                            <div>
+                                <label htmlFor="ward_number" className="block text-sm font-medium text-slate-700 mb-2">
+                                    Ward Number <span className="text-red-500">*</span>
+                                </label>
+                                <select
+                                    id="ward_number"
+                                    name="ward_number"
+                                    required
+                                    value={formData.ward_number || ""}
+                                    onChange={handleInputChange}
+                                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                >
+                                    <option value="">Select your ward</option>
+                                    {Array.from({ length: 20 }, (_, i) => (
+                                        <option key={i + 1} value={i + 1}>
+                                            Ward {i + 1}
+                                        </option>
+                                    ))}
+                                </select>
+                                <p className="text-xs text-slate-500 mt-1">
+                                    Select the ward where your business is located
+                                </p>
                             </div>
 
                             {/* Description */}

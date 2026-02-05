@@ -27,6 +27,7 @@ export const providerService = {
         if (data.longitude) formData.append('longitude', data.longitude.toString());
         if (data.experience_years) formData.append('experience_years', data.experience_years.toString());
         if (data.image) formData.append('image', data.image);
+        formData.append('ward_number', data.ward_number.toString());
 
         return apiClient.post<Provider>(API_ENDPOINTS.PROVIDERS, formData);
     },
@@ -36,6 +37,7 @@ export const providerService = {
         limit?: number;
         category?: string;
         search?: string;
+        ward?: number;
         sort?: string;
         order?: 'asc' | 'desc';
     }): Promise<PaginatedResponse<Provider>> {
@@ -45,6 +47,7 @@ export const providerService = {
         if (params?.limit) queryParams.append('limit', params.limit.toString());
         if (params?.category) queryParams.append('category', params.category);
         if (params?.search) queryParams.append('search', params.search);
+        if (params?.ward) queryParams.append('ward', params.ward.toString());
         if (params?.sort) queryParams.append('sort', params.sort);
         if (params?.order) queryParams.append('order', params.order);
 

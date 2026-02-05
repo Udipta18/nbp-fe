@@ -70,14 +70,21 @@ export function ProviderLocation({ provider }: { provider: Provider }) {
     const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`;
 
     return (
-        <a
-            href={googleMapsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-slate-500 flex items-center gap-1 mt-1 hover:text-blue-600 transition-colors"
-        >
-            <MapPin className="h-3 w-3 flex-shrink-0" />
-            <span className="truncate">{displayAddress}</span>
-        </a>
+        <div className="flex flex-col gap-1 mt-1">
+            {provider.ward_number && (
+                <span className="inline-flex items-center w-fit px-2 py-0.5 rounded text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-100">
+                    WARD {provider.ward_number}
+                </span>
+            )}
+            <a
+                href={googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-slate-500 flex items-center gap-1 hover:text-blue-600 transition-colors"
+            >
+                <MapPin className="h-3 w-3 flex-shrink-0" />
+                <span className="truncate">{displayAddress}</span>
+            </a>
+        </div>
     );
 }

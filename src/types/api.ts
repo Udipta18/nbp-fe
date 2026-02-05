@@ -10,6 +10,7 @@ export interface Provider {
     city?: string;
     state?: string;
     zip_code?: string;
+    ward_number?: number;
     latitude?: number;
     longitude?: number;
     experience_years?: number;
@@ -48,6 +49,7 @@ export interface CreateProviderData {
     city?: string;
     state?: string;
     zip_code?: string;
+    ward_number: number;
     latitude?: number;
     longitude?: number;
     experience_years?: number;

@@ -6,11 +6,13 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const category = searchParams.get('category');
     const search = searchParams.get('search');
+    const ward = searchParams.get('ward');
     const limit = searchParams.get('limit') || '50';
 
     const params = new URLSearchParams();
     if (category) params.append('category', category);
     if (search) params.append('search', search);
+    if (ward) params.append('ward', ward);
     params.append('limit', limit);
 
     try {
