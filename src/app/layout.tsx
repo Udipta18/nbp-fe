@@ -14,6 +14,7 @@ export const metadata: Metadata = {
     manifest: "/manifest.json",
 };
 
+import QueryProvider from "@/components/providers/QueryProvider";
 import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 
@@ -25,11 +26,13 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${jakarta.className} antialiased bg-slate-50 relative pb-24 sm:pb-0`}>
-                <Suspense fallback={null}>
-                    <ScrollToTop />
-                </Suspense>
-                {children}
-                <MobileBottomNav />
+                <QueryProvider>
+                    <Suspense fallback={null}>
+                        <ScrollToTop />
+                    </Suspense>
+                    {children}
+                    <MobileBottomNav />
+                </QueryProvider>
             </body>
         </html>
     );

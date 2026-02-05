@@ -33,6 +33,7 @@ export interface Provider {
     rating: number;
     review_count: number;
     is_verified?: boolean;
+    tags?: string[];
     status: 'PENDING' | 'APPROVED' | 'REJECTED' | 'SUSPENDED';
     created_at: string;
     updated_at: string;
