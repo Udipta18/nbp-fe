@@ -130,6 +130,7 @@ export function MobileBottomNav() {
                 onPointerUp={handlePointerUp}
                 onPointerLeave={handlePointerLeave}
                 onPointerCancel={handlePointerLeave}
+                style={{ touchAction: "none" }}
             >
                 {navItems.map((item, index) => {
                     const isActive = index === activeIndex;

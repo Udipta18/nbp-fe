@@ -125,6 +125,7 @@ export function MobileFilter({ categories, selectedCategory, currentWard }: Mobi
                             <Link
                                 href={buildUrl(undefined, currentWard)}
                                 onClick={() => setOpen(false)}
+                                scroll={false}
                                 className={cn(
                                     "px-4 py-4 rounded-2xl text-center font-semibold transition-all text-sm",
                                     !selectedCategory
@@ -139,6 +140,7 @@ export function MobileFilter({ categories, selectedCategory, currentWard }: Mobi
                                     key={cat.id}
                                     href={buildUrl(cat.id, currentWard)}
                                     onClick={() => setOpen(false)}
+                                    scroll={false}
                                     className={cn(
                                         "px-4 py-4 rounded-2xl text-center font-semibold transition-all text-sm",
                                         selectedCategory === cat.id
@@ -156,6 +158,7 @@ export function MobileFilter({ categories, selectedCategory, currentWard }: Mobi
                             <Link
                                 href={buildUrl(selectedCategory, undefined)}
                                 onClick={() => setOpen(false)}
+                                scroll={false}
                                 className={cn(
                                     "block px-4 py-4 rounded-2xl text-center font-semibold transition-all text-sm",
                                     !currentWard
@@ -176,6 +179,7 @@ export function MobileFilter({ categories, selectedCategory, currentWard }: Mobi
                                             key={wardNum}
                                             href={buildUrl(selectedCategory, wardNum)}
                                             onClick={() => setOpen(false)}
+                                            scroll={false}
                                             className={cn(
                                                 "aspect-square flex items-center justify-center rounded-xl font-bold text-sm transition-all",
                                                 isSelected
