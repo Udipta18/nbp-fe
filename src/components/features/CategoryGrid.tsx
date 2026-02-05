@@ -63,7 +63,7 @@ export function CategoryGrid() {
                 const colorClass = colorMap[cat.id] || "bg-gray-100 text-gray-600";
 
                 return (
-                    <Link href={`/services?category=${cat.id}`} key={cat.id}>
+                    <Link href={`/services?category=${cat.id}`} key={cat.id} scroll={true}>
                         <div className="h-full cursor-pointer bg-white rounded-xl border border-slate-100/80 shadow-sm transition-all hover:border-blue-200 hover:shadow-md hover:-translate-y-1">
                             <div className="flex flex-col items-center justify-center p-6 gap-3 text-center h-full">
                                 <div className={`p-4 rounded-full ${colorClass}`}>

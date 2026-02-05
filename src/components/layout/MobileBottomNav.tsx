@@ -61,6 +61,7 @@ export function MobileBottomNav() {
     };
 
     const handlePointerDown = (e: React.PointerEvent) => {
+        e.preventDefault();
         setIsDragging(true);
         containerRef.current?.setPointerCapture(e.pointerId);
         const index = getIndexFromPosition(e.clientX);
@@ -69,6 +70,7 @@ export function MobileBottomNav() {
 
     const handlePointerMove = (e: React.PointerEvent) => {
         if (!isDragging) return;
+        e.preventDefault();
         const index = getIndexFromPosition(e.clientX);
         if (index !== activeIndex) {
             setActiveIndex(index);

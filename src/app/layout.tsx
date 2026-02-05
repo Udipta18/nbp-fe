@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import { Suspense } from "react";
 
 const jakarta = Plus_Jakarta_Sans({
     subsets: ["latin"],
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
 };
 
 import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
+import { ScrollToTop } from "@/components/layout/ScrollToTop";
 
 export default function RootLayout({
     children,
@@ -23,6 +25,9 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${jakarta.className} antialiased bg-slate-50 relative pb-24 sm:pb-0`}>
+                <Suspense fallback={null}>
+                    <ScrollToTop />
+                </Suspense>
                 {children}
                 <MobileBottomNav />
             </body>
