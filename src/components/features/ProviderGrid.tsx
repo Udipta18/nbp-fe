@@ -125,7 +125,8 @@ export function ProviderGrid({ category, search, ward }: ProviderGridProps) {
         retry: false,
     });
 
-    const providers: Provider[] = providersData?.data || [];
+    // Only show admin-approved providers
+    const providers: Provider[] = (providersData?.data || []).filter((p: Provider) => p.status === 'APPROVED');
 
     const toggleTag = (slug: string) => {
         setSelectedTags(prev =>
@@ -245,8 +246,8 @@ export function ProviderGrid({ category, search, ward }: ProviderGridProps) {
                                         {provider.rating}
                                     </div>
 
-                                    {/* Verified */}
-                                    {provider.is_verified && (
+                                    {/* Verified - Show for all APPROVED providers */}
+                                    {provider.status === 'APPROVED' && (
                                         <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-green-600 px-2.5 py-1 rounded-full text-[10px] font-bold flex items-center gap-1.5 shadow-sm border border-slate-100/50">
                                             <CheckCircle className="h-3 w-3" />
                                             Verified
@@ -271,9 +272,7 @@ export function ProviderGrid({ category, search, ward }: ProviderGridProps) {
                                             </span>
                                         )}
 
-                                        {provider.tags?.map(tag => (
-                                            <TagBadge key={tag} slug={tag} />
-                                        ))}
+                                        {/* Tags are for internal sorting, not displayed to users */}
 
                                         {provider.experience_years && provider.experience_years > 0 && (
                                             <span className="px-2.5 py-1 bg-blue-50 text-blue-600 border border-blue-100/50 text-xs font-medium rounded-md">

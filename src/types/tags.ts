@@ -66,20 +66,20 @@ export const tagDisplayNames: Record<string, string> = {
     oxygen: 'Oxygen',
 };
 
-// Tags by category (for filtering)
+// Tags by category (for filtering) - 'verified' removed since all displayed providers are APPROVED
 export const tagsByCategory: Record<string, TagSlug[]> = {
-    'Food': ['verified', '5_star', '24x7', 'upi_accepted', 'free_delivery', 'veg_only', 'home_cooked'],
-    'Tiffin': ['verified', '5_star', '24x7', 'upi_accepted', 'free_delivery', 'veg_only', 'home_cooked'],
-    'Grocery': ['verified', '5_star', '24x7', 'upi_accepted', 'free_delivery'],
-    'Plumbing': ['verified', '5_star', '24x7', 'upi_accepted', 'same_day', 'insured', 'govt_certified', 'emergency_available'],
-    'Electrician': ['verified', '5_star', '24x7', 'upi_accepted', 'same_day', 'insured', 'govt_certified', 'emergency_available'],
-    'AC Repair': ['verified', '5_star', '24x7', 'upi_accepted', 'same_day', 'insured', 'emergency_available'],
-    'Doctors': ['verified', '5_star', '24x7', 'upi_accepted', 'mbbs', 'video_consult', 'home_visit'],
-    'Ambulance': ['verified', '5_star', '24x7', 'upi_accepted', 'icu_equipped', 'oxygen'],
-    'Cleaning': ['verified', '5_star', '24x7', 'upi_accepted', 'same_day', 'insured'],
-    'Painting': ['verified', '5_star', 'upi_accepted', 'insured'],
-    'Car Service': ['verified', '5_star', '24x7', 'upi_accepted'],
+    'Food': ['5_star', '24x7', 'upi_accepted', 'free_delivery', 'veg_only', 'home_cooked'],
+    'Tiffin': ['5_star', '24x7', 'upi_accepted', 'free_delivery', 'veg_only', 'home_cooked'],
+    'Grocery': ['5_star', '24x7', 'upi_accepted', 'free_delivery'],
+    'Plumbing': ['5_star', '24x7', 'upi_accepted', 'same_day', 'insured', 'govt_certified', 'emergency_available'],
+    'Electrician': ['5_star', '24x7', 'upi_accepted', 'same_day', 'insured', 'govt_certified', 'emergency_available'],
+    'AC Repair': ['5_star', '24x7', 'upi_accepted', 'same_day', 'insured', 'emergency_available'],
+    'Doctors': ['5_star', '24x7', 'upi_accepted', 'mbbs', 'video_consult', 'home_visit'],
+    'Ambulance': ['5_star', '24x7', 'upi_accepted', 'icu_equipped', 'oxygen'],
+    'Cleaning': ['5_star', '24x7', 'upi_accepted', 'same_day', 'insured'],
+    'Painting': ['5_star', 'upi_accepted', 'insured'],
+    'Car Service': ['5_star', '24x7', 'upi_accepted'],
 };
 
-// Universal tags shown for all categories
-export const universalTags: TagSlug[] = ['verified', '5_star', '24x7', 'upi_accepted'];
+// Universal tags shown for all categories - 'verified' removed
+export const universalTags: TagSlug[] = ['5_star', '24x7', 'upi_accepted'];
