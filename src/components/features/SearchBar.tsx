@@ -194,7 +194,7 @@ export function SearchBar({ className }: { className?: string }) {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: -10, scale: 0.98 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute top-full left-0 right-0 mt-3 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-slate-100 overflow-hidden"
+                        className="absolute top-full left-0 right-0 mt-3 bg-white backdrop-blur-xl rounded-2xl shadow-2xl border border-slate-100 z-50"
                     >
                         {results.length > 0 ? (
                             <div className="p-2">
@@ -241,7 +241,7 @@ export function SearchBar({ className }: { className?: string }) {
                                 </button>
                             </div>
                         ) : (
-                            <div className="p-4">
+                            <div className="p-4 pb-6">
                                 <div className="px-2 pb-2 text-xs font-semibold text-slate-400 uppercase tracking-wider">
                                     {searchMode === "services" ? "Popular Categories" : "Quick Select"}
                                 </div>

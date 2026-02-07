@@ -38,13 +38,13 @@ export default function AdminDashboard() {
 
     useEffect(() => {
         checkAuth();
-        loadData();
     }, []);
 
     const checkAuth = async () => {
-        const user = await authService.getCurrentUser();
-        if (!user || user.role !== "admin") {
-            router.push("/login");
+        // Check if token is valid and not expired
+        const isValid = await authService.validateAuthOrRedirect(router);
+        if (isValid) {
+            loadData();
         }
     };
 
@@ -184,8 +184,8 @@ export default function AdminDashboard() {
                             <div className="absolute -bottom-2 -right-2">
                                 <Badge
                                     className={`shadow-sm border-2 border-white ${provider.status === "APPROVED" ? "bg-green-500 hover:bg-green-600" :
-                                            provider.status === "REJECTED" ? "bg-red-500 hover:bg-red-600" :
-                                                "bg-yellow-500 hover:bg-yellow-600"
+                                        provider.status === "REJECTED" ? "bg-red-500 hover:bg-red-600" :
+                                            "bg-yellow-500 hover:bg-yellow-600"
                                         }`}
                                 >
                                     {provider.status === "APPROVED" ? <CheckCircle className="h-3 w-3" /> :

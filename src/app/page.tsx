@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/layout/Navbar";
 import { SearchBar } from "@/components/features/SearchBar";
 import { CategoryGrid } from "@/components/features/CategoryGrid";
+import { HeroSection } from "@/components/features/HeroSection";
 import {
     ShieldCheck,
     Clock,
@@ -22,30 +23,20 @@ export default function Home() {
             {/* Hero Section */}
             <section className="relative py-16 md:py-28 bg-gradient-to-b from-blue-50 to-white">
                 <div className="container px-4 md:px-6 relative z-20">
-                    <div className="flex flex-col items-center text-center space-y-4">
-                        <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full text-sm font-medium mb-2">
-                            <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-                            </span>
-                            100+ Verified Service Providers
-                        </div>
-                        <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight max-w-4xl text-gray-900">
-                            Trusted Local Services in <span className="text-blue-600">New Barrackpur</span>
-                        </h1>
-                        <p className="text-lg text-gray-600 max-w-[700px]">
-                            Find trusted plumbers, doctors, electricians, and more. Book services from verified local providers instantly.
-                        </p>
+                    {/* Animated Hero Content */}
+                    <HeroSection />
 
-                        {/* Search Bar with Autocomplete */}
-                        <SearchBar className="w-full max-w-sm md:max-w-xl mt-6" />
+                    {/* Search Bar with Autocomplete */}
+                    <div className="flex justify-center mt-8">
+                        <SearchBar className="w-full max-w-sm md:max-w-xl" />
                     </div>
                 </div>
 
                 {/* Decorative bg elements - Constrained */}
                 <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-                    <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-100 rounded-full blur-3xl opacity-50" />
+                    <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-100 rounded-full blur-3xl opacity-50 animate-pulse" />
                     <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-green-100 rounded-full blur-3xl opacity-50" />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-50 rounded-full blur-3xl opacity-30" />
                 </div>
             </section>
 

@@ -29,6 +29,13 @@ export const providerService = {
         if (data.image) formData.append('image', data.image);
         formData.append('ward_number', data.ward_number.toString());
 
+        // Add gallery images (each with same field name for array upload)
+        if (data.gallery_images && data.gallery_images.length > 0) {
+            data.gallery_images.forEach(file => {
+                formData.append('gallery_images', file);
+            });
+        }
+
         return apiClient.post<Provider>(API_ENDPOINTS.PROVIDERS, formData);
     },
 

@@ -49,6 +49,28 @@ class ApiClient {
 
             console.log(`[API] Response ${response.status}:`, data);
 
+            // Handle 401 Unauthorized - token expired or invalid
+            // But NOT for auth endpoints (login, refresh) to avoid redirect loops
+            const isAuthEndpoint = endpoint.includes('/auth/login') || endpoint.includes('/auth/refresh');
+            if (response.status === 401 && !isAuthEndpoint) {
+                console.log('[API] Unauthorized - clearing auth and redirecting to login');
+                // Clear auth data
+                if (typeof window !== 'undefined') {
+                    localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN);
+                    localStorage.removeItem(STORAGE_KEYS.REFRESH_TOKEN);
+                    localStorage.removeItem(STORAGE_KEYS.USER);
+                    // Redirect to login
+                    window.location.href = '/login';
+                }
+                throw {
+                    success: false,
+                    error: {
+                        message: 'Session expired. Please login again.',
+                        statusCode: 401,
+                    },
+                };
+            }
+
             if (!response.ok) {
                 throw {
                     success: false,

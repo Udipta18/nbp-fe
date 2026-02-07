@@ -55,6 +55,7 @@ export interface CreateProviderData {
     longitude?: number;
     experience_years?: number;
     image?: File;
+    gallery_images?: File[];  // Up to 6 gallery images
 }
 
 export interface Review {
