@@ -368,6 +368,37 @@ export default function BecomeProviderPage() {
                             </div>
                         </Section>
 
+                        {/* 5. Process Overview */}
+                        <div className="bg-blue-50/50 rounded-3xl p-6 md:p-8 border border-blue-100">
+                            <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                                <AlertCircle className="h-5 w-5 text-blue-600" />
+                                What happens next?
+                            </h3>
+                            <div className="space-y-4">
+                                <div className="flex gap-4">
+                                    <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm flex-shrink-0">1</div>
+                                    <div>
+                                        <h4 className="font-semibold text-slate-900">Admin Review</h4>
+                                        <p className="text-sm text-slate-600">Our team will verify your submitted details and documents.</p>
+                                    </div>
+                                </div>
+                                <div className="flex gap-4">
+                                    <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm flex-shrink-0">2</div>
+                                    <div>
+                                        <h4 className="font-semibold text-slate-900">Verification Call</h4>
+                                        <p className="text-sm text-slate-600">You may receive a call to confirm your service areas and expertise.</p>
+                                    </div>
+                                </div>
+                                <div className="flex gap-4">
+                                    <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm flex-shrink-0">3</div>
+                                    <div>
+                                        <h4 className="font-semibold text-slate-900">Activation</h4>
+                                        <p className="text-sm text-slate-600">Once approved, your profile will go live and you can start accepting jobs.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         {/* Submit Area - STATIC on Mobile, FLOATING on Desktop */}
                         <div className="pt-8 pb-4 md:pb-0">
                             {/* Mobile Layout: Slide to Submit */}
